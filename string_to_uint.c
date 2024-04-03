@@ -2,15 +2,6 @@
 #include <stdlib.h>
 #include "strnum.h"
 #include <time.h>
-long int power_10(const int num, const int exponent){
-    const int base = 10;
-    long int number = 1;
-    for (int i = 0; i < exponent; i++){
-        number *= base;
-    }
-    number *= num;
-    return number;
-}
 
 unsigned int string_to_uint(char string[]){
     char* string_pointer;
@@ -28,7 +19,7 @@ unsigned int string_to_uint(char string[]){
     }
     
     int counter = 0;
-    for (char* character = string; *character; ++character){
+    for ( char* character = string; *character; ++character){
         if (*character >='0' && *character <= '9'){
             num_array[counter] = *character - 48;
         }
@@ -43,24 +34,13 @@ unsigned int string_to_uint(char string[]){
         }
         counter++;
     }
-    int iter = 0;
+    int iterator = 0;
     int number = 0;
     for (int i = str_len -1 ; i >= 0; i--){
-        number += power_10(num_array[iter], i); 
-        iter++;
+        number += power_10(num_array[iterator], i); 
+        iterator++;
     }
 
     free(num_array);
     return number;
-}
-
-int main(){
-    char string[] = "12354329";
-    clock_t start, stop;
-    start = clock();
-    int number = string_to_uint(string);
-    stop = clock();
-    printf("%d\n", number);
-    printf("Function took %lf sec\n", (stop - start)/ (double) CLOCKS_PER_SEC);
-    return 0;
 }
