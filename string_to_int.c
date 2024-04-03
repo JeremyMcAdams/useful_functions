@@ -1,16 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "strnum.h"
-#include <time.h>
-long int power_10(const int num, const int exponent){
-    const int base = 10;
-    long int number = 1;
-    for (int i = 0; i < exponent; i++){
-        number *= base;
-    }
-    number *= num;
-    return number;
-}
+
 int string_to_int(char string[]){
     char* string_pointer;
     for(string_pointer = string; *string_pointer; ++string_pointer);
