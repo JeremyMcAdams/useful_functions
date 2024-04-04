@@ -3,26 +3,6 @@
 #include <stdbool.h>
 #include "strnum.h"
 
-long int power_10(const int num, const int exponent){
-    const int base = 10;
-    long int number = 1;
-    for (int i = 0; i < exponent; i++){
-        number *= base;
-    }
-    number *= num;
-    return number;
-}
-
-double power_neg10(int num, int exponent){
-    float base = 10;
-    float number = 1;
-    for (int i = 0; i < exponent; i++){
-        number /= 10;
-    }
-    number *= num;
-    return number;
-}
-
 float string_to_float(char string[]){
     //start array allocation
     char* string_pointer;
@@ -38,7 +18,7 @@ float string_to_float(char string[]){
     printf("decimal location: %d\n", int_buffer_size);
     printf("Floating point size: %d\n", float_buffer_size);
     
-    int flt_on = false;
+    int float_on = false;
     int sign = false;
     register float *float_array = malloc(sizeof(float) * float_buffer_size);
     register int *num_array = malloc(sizeof(int) * int_buffer_size)                     ;
@@ -55,15 +35,15 @@ float string_to_float(char string[]){
     
     for (char* character = string; *character; ++character){
 
-        if (flt_on && (*character >= '0' && *character <= '9')){
+        if (float_on && (*character >= '0' && *character <= '9')){
             float_array[float_counter] = *character - 48;
             float_counter++;
         }
-        else if (flt_on && !(*character >= '0' && *character <= '9')){
+        else if (float_on && !(*character >= '0' && *character <= '9')){
             float_array[float_counter] = -1;
         }
         
-        if (!flt_on){
+        if (!float_on){
             if (*character >= '0' && *character <= '9'){
                 num_array[int_counter] = *character - 48;
             }
@@ -71,7 +51,7 @@ float string_to_float(char string[]){
                 sign = 1;
             }   
             else if (*character == '.'){
-                flt_on = 1;
+                float_on = 1;
             }
             else {
                 num_array[int_counter] = -1;
@@ -103,5 +83,4 @@ float string_to_float(char string[]){
     free(float_array);
     return number;
 }
-
 
