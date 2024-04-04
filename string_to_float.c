@@ -15,13 +15,10 @@ float string_to_float(char string[]){
         }
     }
     int float_buffer_size = string_pointer - decimal_pointer;
-    printf("decimal location: %d\n", int_buffer_size);
-    printf("Floating point size: %d\n", float_buffer_size);
-    
     int float_on = false;
     int sign = false;
     register float *float_array = malloc(sizeof(float) * float_buffer_size);
-    register int *num_array = malloc(sizeof(int) * int_buffer_size)                     ;
+    register int *num_array = malloc(sizeof(int) * int_buffer_size);
     if (!float_array || !num_array){
         free(float_array);
         free(num_array);
