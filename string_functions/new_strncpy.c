@@ -2,7 +2,7 @@
 #define bool int
 #define true 1
 #define false 0
-void my_strncpy(char destination[], char* source, const int buffer_length){
+void new_strncpy(char destination[], char* source, const int buffer_length){
     bool source_end = false;
     for (int i = 0; i < buffer_length; ++i){
         if (source[i] == '\0'){
