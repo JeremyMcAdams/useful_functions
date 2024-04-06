@@ -1,12 +1,20 @@
-string_funcs: my_strncpy.o my_strlen.o my_safe_gets.o
-	ld -r test_str.o my_strncpy.o my_strlen.o my_safe_gets.o -o string_funcs.o
+string_funcs: new_strncpy.o new_strlen.o safe_gets.o new_strstr.o new_strncmp.o new_strcmp.o 
+	ld -r new_strncpy.o new_strlen.o safe_gets.o new_strstr.o new_strncmp.o new_strcmp.o -o string_funcs.o
 
 
-new_strncpy.o : my_strncpy.c
-	gcc -c my_strncpy.c
-new_strlen.o : my_strlen.c 
-	gcc -c my_strlen.c
-safe_gets.o : my_safe_gets.c
-	gcc -c my_safe_gets.c
+new_strncpy.o : new_strncpy.c
+	gcc -c new_strncpy.c
+new_strlen.o : new_strlen.c 
+	gcc -c new_strlen.c
+safe_gets.o : safe_gets.c
+	gcc -c safe_gets.c
+new_strstr.o : new_strstr.c
+	gcc -c new_strstr.c
+new_strncmp.o : new_strncmp.c
+	gcc -c new_strncmp.c
+new_strcmp.o : new_strcmp.c
+	gcc -c new_strcmp.c
+
+
 clean : 
-	rm test_str.o my_strncpy.o my_strlen.o my_safe_gets.o
+	rm new_strncpy.o new_strlen.o safe_gets.o new_strstr.o new_strncmp.o new_strcmp.o
