@@ -2,13 +2,13 @@
 #define bool int
 #define true 1
 #define false 0
-void new_strncpy(char destination[], char* source, const int buffer_length){
+void new_strncpy(register char* destination, register char* source, register int buffer_length){
     bool source_end = false;
-    for (int i = 0; i < buffer_length; ++i){
+    for (int i = 0; i <= buffer_length; ++i){
         if (source[i] == '\0'){
             source_end = true;
         }
-        else if (i == buffer_length - 1){
+        else if (i == buffer_length){
             destination[i] = '\0';
         }
         else if (source_end){

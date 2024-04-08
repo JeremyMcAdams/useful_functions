@@ -4,7 +4,7 @@ void new_strncpy(register char* destination, register char* source, register int
 int new_strlen(char* string);
 void safe_gets(char* destination, int buffer_size);
 char* new_strstr(char* string, char* substring);
-int new_strcmp(const char* string, const char* comp_string);
-int new_strncmp(const char* string, const char* comp_string, const int len);
+int new_strcmp(register const char* string, register const char* comp_string);
+int new_strncmp(register const char* string, register const char* comp_string, register const int len);
 void strip_string(char* string, char* delimiters);
 #endif
