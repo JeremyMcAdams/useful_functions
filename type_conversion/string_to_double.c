@@ -82,9 +82,3 @@ double string_to_double(char string[]){
     return number;
 }
 
-int main(){
-    char string[] = "423.145464";
-    double number = string_to_double(string);
-    printf("%lf\n", number);
-    return 0;
-}
