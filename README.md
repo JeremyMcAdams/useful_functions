@@ -190,7 +190,7 @@ Output:
 
 ### strnum.h
 
-A header file containing the type conversion functions
+A header file containing the type conversion functions.  
 Update: All conversion functions have a changed return type. They now return pointers to the calculated values to allow for better error handling.
 
 ### Makefile
