@@ -202,8 +202,7 @@ Included in this folder is a gnu makefile that converts all the functions in str
 
 ### Takes a string of number characters and converts them to an int
 
-Returns an int or...  
-Returns -2 with an error warning if a non-number character has been detected. (Negative numbers are accepted)
+Returns an int pointer or 0 if an error occurs.
 
 Example:
 
