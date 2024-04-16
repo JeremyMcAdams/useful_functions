@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include "strnum.h"
 
-double string_to_double(char string[]){
+double* string_to_double(char string[]){
     //start array allocation
     char* string_pointer;
     char* decimal_pointer;
@@ -23,8 +23,8 @@ double string_to_double(char string[]){
     if (!float_array || !num_array){
         free(float_array);
         free(num_array);
-        printf("ErrNo -1: Memory allocation failed\n");
-        return -1;
+        printf("Error: Memory allocation failed\n");
+        return 0;
     }
     
     //start counters
@@ -58,10 +58,10 @@ double string_to_double(char string[]){
         }
         
         if (num_array[int_counter] == -1 || float_array[float_counter] == -1){
-            printf("Errno -2: Non-number dectected\n");
+            printf("Error: Non-number dectected\n");
             free(num_array);
             free(float_array);
-            return -2;
+            return 0;
         }
     }
     
@@ -79,6 +79,7 @@ double string_to_double(char string[]){
     }
     free(num_array);
     free(float_array);
-    return number;
+    double* number_ptr = &number;
+    return number_ptr;
 }
 

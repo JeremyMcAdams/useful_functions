@@ -2,25 +2,25 @@
 #include <stdlib.h>
 #include "strnum.h"
 
-long string_to_longint(char string[]){
+long int* string_to_longint(char string[]){
     char* string_pointer;
     for(string_pointer = string; *string_pointer; ++string_pointer);
     int str_len = string_pointer - string;
     
     if (string[0] != '-' && str_len > 18){
         printf("Error! Input is too long to convert\n");
-        return -1;
+        return 0;
     }
     else if (string[0] == '-' && str_len > 19){
         printf("Error! Input is too long to convert\n");
-        return -1;
+        return 0;
     }
     
     long int *num_array = malloc(sizeof(long int) * str_len);
     if (!num_array){
         free(num_array);
-        printf("Errno -1: Memory allocation failed");
-        return -1;
+        printf("Error: Memory allocation failed");
+        return 0;
     }
     int sign = 0;
     int counter = 0;
@@ -36,9 +36,9 @@ long string_to_longint(char string[]){
         }
         
         if (num_array[counter] == -1){
-            printf("Errno -2: Non-number dectected\n");
+            printf("Error: Non-number dectected\n");
             free(num_array);
-            return -2;
+            return 0;
         }
         counter++;
     }
@@ -52,6 +52,7 @@ long string_to_longint(char string[]){
         number *= -1;
     }
     free(num_array);
-    return number;
+    long int* number_ptr = &number;
+    return number_ptr;
 }
 

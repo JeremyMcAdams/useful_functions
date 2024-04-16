@@ -3,19 +3,19 @@
 #include "strnum.h"
 #include <time.h>
 
-unsigned int string_to_uint(char string[]){
+unsigned int* string_to_uint(char string[]){
     char* string_pointer;
     for(string_pointer = string; *string_pointer; ++string_pointer);
     int str_len = string_pointer - string;
     if (string[0] != '-' && str_len > 9){
         printf("Error! Input is too long to convert\n");
-        return -1;
+        return 0;
     }
     int *num_array = malloc(sizeof(int) * str_len);
     if (!num_array){
         free(num_array);
-        printf("Errno -1: Memory allocation failed");
-        return -1;
+        printf("Error: Memory allocation failed");
+        return 0;
     }
     
     int counter = 0;
@@ -28,19 +28,19 @@ unsigned int string_to_uint(char string[]){
         }
         
         if (num_array[counter] == -1){
-            printf("Errno -2: Non-number dectected\n");
+            printf("Error: Non-number detected\n");
             free(num_array);
-            return -2;
+            return 0;
         }
         counter++;
     }
     int iterator = 0;
-    int number = 0;
+    unsigned int number = 0;
     for (int i = str_len -1 ; i >= 0; i--){
         number += power_10(num_array[iterator], i); 
         iterator++;
     }
-
+    unsigned int* number_ptr = &number;
     free(num_array);
-    return number;
+    return number_ptr;
 }

@@ -191,6 +191,7 @@ Output:
 ### strnum.h
 
 A header file containing the type conversion functions
+Update: All conversion functions have a changed return type. They now return pointers to the calculated values to allow for better error handling.
 
 ### Makefile
 Included in this folder is a gnu makefile that converts all the functions in strnum.h to a single .o file that can be linked to any program you want.
@@ -210,8 +211,8 @@ Example:
 >#include "strnum.h"
 >int main(){  
 >&nbsp;&nbsp;&nbsp;&nbsp;char string[] = "-12345";  
->&nbsp;&nbsp;&nbsp;&nbsp;int number = string_to_int(string);  
->&nbsp;&nbsp;&nbsp;&nbsp;printf("Number you entered: %d\n", number);  
+>&nbsp;&nbsp;&nbsp;&nbsp;int* number = string_to_int(string);  
+>&nbsp;&nbsp;&nbsp;&nbsp;printf("Number you entered: %d\n", *number);  
 >&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
 >}
 
@@ -222,16 +223,16 @@ Output:
 
 ## string_to_uint(char* string);
 
-### Takes a string of number characters and converts them to a uint
+### Takes a string of number characters and converts them to a unsigned int
 
-Returns a uint or -2 if a non-number is detected. (A negative number will cause an NAN error)
+Returns a pointer to an unsigned int or 0 if an error occurs.
 
 >#include <stdio.h>
 >#include "strnum.h"
 >int main(){  
 >&nbsp;&nbsp;&nbsp;&nbsp;char string[] = "95682";  
->&nbsp;&nbsp;&nbsp;&nbsp;int number = string_to_uint(string);  
->&nbsp;&nbsp;&nbsp;&nbsp;printf("Number you entered: %d\n", number);  
+>&nbsp;&nbsp;&nbsp;&nbsp;int* number = string_to_uint(string);  
+>&nbsp;&nbsp;&nbsp;&nbsp;printf("Number you entered: %d\n", *number);  
 >&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
 >}
 
@@ -247,14 +248,14 @@ See string_to_int. This function follows the same rules
 
 ### Takes a string of number characters and converts them to a float
 
-Returns a float or -2 if a non-number is detected. (Negative numbers are accepted)
+Returns a float pointer or 0 if an error occurs. (Negative numbers are accepted)
 
 >#include <stdio.h>
 >#include "strnum.h"
 >int main(){  
 >&nbsp;&nbsp;&nbsp;&nbsp;char string[] = "3.1415";  
->&nbsp;&nbsp;&nbsp;&nbsp;float number = string_to_float(string);  
->&nbsp;&nbsp;&nbsp;&nbsp;printf("Number you entered: %f\n", number);  
+>&nbsp;&nbsp;&nbsp;&nbsp;float* number = string_to_float(string);  
+>&nbsp;&nbsp;&nbsp;&nbsp;printf("Number you entered: %f\n", *number);  
 >&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
 >}
 
@@ -268,4 +269,5 @@ Example:
 ## string_to_double(char* string);
 
 ### Takes a string of number characters and converts them to a double
+Returns a double pointer or 0 if an error occurs.
 See string to float above. This function follows the same rules
