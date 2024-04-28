@@ -1,5 +1,4 @@
 #include "my_string.h"
-#include <stdio.h>
 void new_strncpy(register char* destination, register char* source, register int buffer_length){
     for (register int i = 0; i <= buffer_length; ++i){
         if (source[i] == '\0'){
