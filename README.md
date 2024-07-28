@@ -184,6 +184,34 @@ Example:
 Output:
 >HellothereThisismysamplestring
 
+## unsigned test_strtok(char* string, char* delimiters, char** pointers);
+
+### Takes a given character array and returns the length of a given token. This version also preserves the parent string.
+
+Example:
+>#include <stdio.h>  
+>#include "my_string.h"  
+>int main(){  
+>&nbsp;&nbsp;&nbsp;&nbsp;char string[] = "Hello there! This is my sample string.";  
+>&nbsp;&nbsp;&nbsp;&nbsp;char delimiters[] = "!. ";  
+>&nbsp;&nbsp;&nbsp;&nbsp;char* pointers[2] = {0}; //it is important to initialize the pointers to 0 for the function to work.  
+>&nbsp;&nbsp;&nbsp;&nbsp;char token_buffer[10];  
+>&nbsp;&nbsp;&nbsp;&nbsp;unsigned token_len = test_strtok(string, delimiters, pointers);  
+>&nbsp;&nbsp;&nbsp;&nbsp;while(pointers[0] != 0) {  
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_strncpy(token_buffer, pointers[0], token_len);  
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%s\n", token_buffer);  
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;token_len = test_strtok(string, delimiters, pointers);  
+>&nbsp;&nbsp;&nbsp;&nbsp;}  
+>&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
+>  }  
+Output:  
+>Hello  
+>there  
+>This  
+>is  
+>my  
+>sample  
+>string  
 
 
 # type_conversion
