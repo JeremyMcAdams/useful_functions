@@ -1,5 +1,5 @@
-string_funcs: new_strncpy.o new_strlen.o safe_gets.o new_strstr.o new_strncmp.o new_strcmp.o strip_string.o upper.o lower.o new_strtok.o
-	ld -r new_strncpy.o new_strlen.o safe_gets.o new_strstr.o new_strncmp.o new_strcmp.o strip_string.o upper.o lower.o new_strtok.o -o string_funcs.o
+string_funcs: new_strncpy.o new_strlen.o safe_gets.o new_strstr.o new_strncmp.o new_strcmp.o strip_string.o upper.o lower.o new_strtok.o test_strtok.o
+	ld -r new_strncpy.o new_strlen.o safe_gets.o new_strstr.o new_strncmp.o new_strcmp.o strip_string.o upper.o lower.o new_strtok.o test_strtok.o -o string_funcs.o
 
 new_strncpy.o : new_strncpy.c
 	gcc -c new_strncpy.c
@@ -21,6 +21,7 @@ lower.o: lower.c
 	gcc -c lower.c
 new_strtok.o: new_strtok.c
 	gcc -c new_strtok.c
-
+test_strtok.o: test_strtok.c
+	gcc -c test_strtok.c
 clean : 
-	rm new_strncpy.o new_strlen.o safe_gets.o new_strstr.o new_strncmp.o new_strcmp.o lower.o upper.o strip_string.o new_strtok.o
+	rm new_strncpy.o new_strlen.o safe_gets.o new_strstr.o new_strncmp.o new_strcmp.o lower.o upper.o strip_string.o new_strtok.o test_strtok.o

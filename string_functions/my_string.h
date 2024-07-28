@@ -10,4 +10,5 @@ void strip_string(register char* string, register char* delimiters);
 void upper(register char* string);
 void lower(register char* string);
 char* new_strtok(register char* string, register char* delimiters);
+unsigned test_strtok(register char* string, register char* delimiters, register char** pointers);
 #endif
