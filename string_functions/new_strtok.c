@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
 char* new_strtok(register char* string, register char* delimiters){    
     static char* holder = 0;
     register char* token = 0;

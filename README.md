@@ -164,8 +164,6 @@ Example:
 Output:
 >This is a sample str
 
-Note: As of this time I have observed some abnormal behavior using this in my advent of code Day1_part2.c program. Occasionally ghost characters appear but also not in the buffer it seems. I cannot replicate this with normal string tests. I am still working on piecing together why this occurs. Keep this in mind if you want to play with this code.
-
 ## void strip_string(char* string, char* delimiters);
 
 ### Takes a given character array and removes all characters in the delimiters argument
@@ -173,6 +171,7 @@ Note: As of this time I have observed some abnormal behavior using this in my ad
 Example:
 >#include <stdio.h>  
 >#include "my_string.h"  
+>#include <stdbool.h>
 >int main(){  
 >&nbsp;&nbsp;&nbsp;&nbsp;char string[] = "Hello there! This is my sample string.";  
 >&nbsp;&nbsp;&nbsp;&nbsp;char delimiters[] = "!. ";  
@@ -184,9 +183,37 @@ Example:
 Output:
 >HellothereThisismysamplestring
 
-## unsigned test_strtok(char* string, char* delimiters, char** pointers);
+## char* new_strtok(char* string, char* delimiters);  
 
-### Takes a given character array and returns the length of a given token. This version also preserves the parent string.
+### Breaks a given character array into component parts based on given delimiters and returns the pointer to the beginning of the last fragment
+
+>#include <stdio.h>  
+>#include "my_string.h"  
+>int main(){  
+>&nbsp;&nbsp;&nbsp;&nbsp;char string[] = "Hello there! This is my sample string.";  
+>&nbsp;&nbsp;&nbsp;&nbsp;char delimiters[] = "!. ";  
+>&nbsp;&nbsp;&nbsp;&nbsp;char token_buffer[10];  
+>&nbsp;&nbsp;&nbsp;&nbsp;char* fragment = new_strtok(string, delimiters);  
+>&nbsp;&nbsp;&nbsp;&nbsp;while(1) {  
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (fragment == NULL) { break;}  
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_strncpy(token_buffer, fragment, sizeof(token_buffer));  
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;printf("%s\n", token_buffer);  
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fragment = new_strtok(string, delimiters);  
+>&nbsp;&nbsp;&nbsp;&nbsp;}  
+>&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
+}  
+
+Output:  
+>Hello  
+>there  
+>This  
+>is  
+>my  
+>sample  
+>string  
+
+## unsigned test_strtok(char* string, char* delimiters, char** pointers);
+### Takes a given character array and returns the length of a given token. This version preserves the parent string.
 
 Example:
 >#include <stdio.h>  
@@ -204,6 +231,7 @@ Example:
 >&nbsp;&nbsp;&nbsp;&nbsp;}  
 >&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
 >  }  
+
 Output:  
 >Hello  
 >there  
@@ -213,88 +241,53 @@ Output:
 >sample  
 >string  
 
+## char* cat_string(char* storage_string, char* to_add);
+### Takes a target string and appends it to the end of a string buffer and returns a pointer to the last end point.
+
+Example: 
+>#include <stdio.h>  
+>#include "my_string.h"  
+>int main(){  
+>&nbsp;&nbsp;&nbsp;&nbsp;char string[100] = "This is my sample string.";  
+>&nbsp;&nbsp;&nbsp;&nbsp;char* last_loc = cat_string(string, " Here is an appended part. ");  
+>&nbsp;&nbsp;&nbsp;&nbsp;last_loc = cat_string(last_loc, "And here is even more stuff");  
+>&nbsp;&nbsp;&nbsp;&nbsp;printf("%s\n", string);  
+>&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
+>}
+
+Output:
+>This is my sample string. Here is an appended part. And here is even more stuff
+
+Use of last_loc (last location) speeds up function by allowing the program to skip walking the string buffer to find the null byte.
+
+## char* catn_string(char* storage_string, char* to_add, unsigned len);
+
+### Takes target string and appends the length specified to the end of a string buffer and returns a pointer to the last end point.
+
+Example:
+>#include <stdio.h>  
+>#include "my_string.h"  
+>int main(){  
+>&nbsp;&nbsp;&nbsp;&nbsp;char string[100] = "This is my sample string.";  
+>&nbsp;&nbsp;&nbsp;&nbsp;char* last_loc = cat_string(string, " Here is an appended part. ", 20);  
+>&nbsp;&nbsp;&nbsp;&nbsp;last_loc = cat_string(last_loc, "And here is even more stuff", 20);  
+>&nbsp;&nbsp;&nbsp;&nbsp;printf("%s\n", string);  
+>&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
+>}
+
+Output:
+>This is my sample string. Here is an appendedAnd here is even mor
 
 # type_conversion
 
 ### strnum.h
 
 A header file containing the type conversion functions.  
-Update: All conversion functions have a changed return type. They now return pointers to the calculated values to allow for better error handling.
+
 
 ### Makefile
 Included in this folder is a gnu makefile that converts all the functions in strnum.h to a single .o file that can be linked to any program you want.
 
 # Function Documentation:
 
-## string_to_int(char* string);
-
-### Takes a string of number characters and converts them to an int
-
-Returns an int pointer or 0 if an error occurs.
-
-Example:
-
->#include <stdio.h>
->#include "strnum.h"
->int main(){  
->&nbsp;&nbsp;&nbsp;&nbsp;char string[] = "-12345";  
->&nbsp;&nbsp;&nbsp;&nbsp;int* number = string_to_int(string);  
->&nbsp;&nbsp;&nbsp;&nbsp;printf("Number you entered: %d\n", *number);  
->&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
->}
-
-
-Output:
->Number you entered: -12345
-
-
-## string_to_uint(char* string);
-
-### Takes a string of number characters and converts them to a unsigned int
-
-Returns a pointer to an unsigned int or 0 if an error occurs.
-
->#include <stdio.h>
->#include "strnum.h"
->int main(){  
->&nbsp;&nbsp;&nbsp;&nbsp;char string[] = "95682";  
->&nbsp;&nbsp;&nbsp;&nbsp;int* number = string_to_uint(string);  
->&nbsp;&nbsp;&nbsp;&nbsp;printf("Number you entered: %d\n", *number);  
->&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
->}
-
-Output:
->Number you entered: 95682
-
-## string_to_longint(char* string);
-
-### Takes a string of number characters and converts them to a long int
-See string_to_int. This function follows the same rules
-
-## string_to_float(char* string);
-
-### Takes a string of number characters and converts them to a float
-
-Returns a float pointer or 0 if an error occurs. (Negative numbers are accepted)
-
->#include <stdio.h>
->#include "strnum.h"
->int main(){  
->&nbsp;&nbsp;&nbsp;&nbsp;char string[] = "3.1415";  
->&nbsp;&nbsp;&nbsp;&nbsp;float* number = string_to_float(string);  
->&nbsp;&nbsp;&nbsp;&nbsp;printf("Number you entered: %f\n", *number);  
->&nbsp;&nbsp;&nbsp;&nbsp;return 0;  
->}
-
-Output:
->Number you entered: 3.141500
-
-Note: As of right now for an integer to be a valid entry a '.' must be added to the end of the number. 
-Example:
->3.  
-
-## string_to_double(char* string);
-
-### Takes a string of number characters and converts them to a double
-Returns a double pointer or 0 if an error occurs.
-See string to float above. This function follows the same rules
+Being reworked
