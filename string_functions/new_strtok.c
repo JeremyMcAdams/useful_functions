@@ -1,4 +1,4 @@
-char* new_strtok(register char* string, register char* delimiters){    
+char* new_strtok(register char* restrict string, register char* restrict delimiters){    
     static char* holder = 0;
     register char* token = 0;
     register char* delimiter = delimiters;

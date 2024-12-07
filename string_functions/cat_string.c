@@ -1,5 +1,5 @@
 #include "my_string.h"
-char* cat_string(char* storage_string, char* to_add) {
+char* cat_string(char* restrict storage_string, const char* restrict to_add) {
     if (*storage_string != '\0') {
         for (; *storage_string; ++storage_string);
     }

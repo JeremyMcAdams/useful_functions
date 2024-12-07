@@ -1,5 +1,5 @@
 #include "my_string.h"
-char* new_strstr(register char* string, register char* substring){
+char* new_strstr(register char* restrict string, register char* restrict substring){
 	register char* sub = substring;
 	register char* pointer = 0;
 	

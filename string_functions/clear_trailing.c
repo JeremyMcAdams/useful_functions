@@ -1,5 +1,5 @@
 #include "my_string.h"
-void clear_trailing(char* line, char delimiter) {
+void clear_trailing(char* restrict line, const char delimiter) {
     char* pointer = 0;
     for (pointer = line; *pointer; ++pointer);
     unsigned len = (pointer - line) - 1;

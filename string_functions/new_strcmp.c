@@ -1,5 +1,5 @@
 #include "my_string.h"
-int new_strcmp(register const char* string, register const char* comp_string){
+int new_strcmp(register const char* restrict string, register const char* restrict comp_string){
     while (*string == *comp_string){
         if (*string == '\0'){
             break;
