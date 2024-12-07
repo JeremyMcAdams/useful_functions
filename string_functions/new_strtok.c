@@ -10,7 +10,7 @@ char* new_strtok(register char* restrict string, register char* restrict delimit
     }
     if (*string++ == '\0'){
         holder = 0;
-        return NULL;
+        return 0;
     }
     //spanp in the original version served to skip delimiter values before a useful value
     string--;

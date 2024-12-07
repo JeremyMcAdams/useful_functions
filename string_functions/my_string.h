@@ -1,16 +1,16 @@
 #ifndef MY_STRING_H
 #define MY_STRING_H
-void new_strncpy(register char* destination, register char* source, register const unsigned int buffer_length);
-int new_strlen(register char* string);
-void safe_gets(register char* destination, register int buffer_size);
-char* new_strstr(register char* string, register char* substring);
-int new_strcmp(register const char* string, register const char* comp_string);
-int new_strncmp(register const char* string, register const char* comp_string, register const int len);
-void strip_string(register char* string, register char* delimiters);
-void upper(register char* string);
-void lower(register char* string);
-char* new_strtok(register char* string, register char* delimiters);
-unsigned test_strtok(register char* string, register char* delimiters, register char** pointers);
-char* cat_string(char* storage_string, char* to_add);
-char* catn_string(char* storage_string, char* to_add, unsigned len);
+void new_strncpy(char* destination, char* source, const unsigned int buffer_length);
+int new_strlen(char* string);
+void safe_gets(char* destination, unsigned buffer_size);
+char* new_strstr(char* string, char* substring);
+int new_strcmp(const char* string, const char* comp_string);
+int new_strncmp(const char* string, const char* comp_string, const int len);
+void strip_string(char* string, char* delimiters);
+void upper(char* string);
+void lower(char* string);
+char* new_strtok(char* string, char* delimiters);
+unsigned immut_strtok(char* string, char* delimiters, char** pointers);
+char* cat_string(char* storage_string, const char* to_add);
+char* catn_string(char* storage_string, const char* to_add, const unsigned len);
 #endif

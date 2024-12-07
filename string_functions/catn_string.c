@@ -1,5 +1,5 @@
 #include "my_string.h"
-char* catn_string(char* storage_string, char* to_add, unsigned len) {
+char* catn_string(char* restrict storage_string, const char* restrict to_add, const unsigned len) {
     unsigned iterations = 0;
     if (*storage_string != '\0') {
         for (; *storage_string; ++storage_string);
